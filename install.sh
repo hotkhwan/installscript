@@ -8,6 +8,7 @@ sudo apt install -y \
     apt-transport-https \
     ca-certificates \
     tmux \
+    git-flow \
     vim \
     curl \
     software-properties-common
