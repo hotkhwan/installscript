@@ -43,6 +43,31 @@ sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-
 # Apply executable permissions to Docker Compose
 sudo chmod +x /usr/local/bin/docker-compose
 
+# Install Node.js
+curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# Install Node-RED
+#sudo npm install -g --unsafe-perm node-red
+bash <(curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered)
+
+sudo cp ./settings.js /root/.node-red/settings.js
+sudo cp ./flows.json /root/.node-red/flows.json
+sudo cp ./icon.png /root/.node-red/
+
+# Install some Packet 
+cd /root/.node-red
+sudo npm install crypto-js uuid util rimraf node-red-contrib-mongodb4 node-red-contrib-ip @ridort/node-red-contrib-socketio-simple node-red-contrib-image-tools ttb-node-red-counter
+
+# Enable Node-RED as a service
+sudo systemctl enable nodered.service
+
+# Start Node-RED service
+sudo systemctl start nodered.service
+
+# Print the Node-RED service status
+sudo systemctl status nodered.service
+
 # Print Docker and Docker Compose versions
 docker --version
 docker-compose --version
